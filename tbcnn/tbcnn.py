@@ -8,10 +8,10 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_fold as td
 
-from . import apputil
-from . import data
-from . import embedding
-from .config import hyper, param
+import apputil
+import data
+import embedding
+from config import hyper, param
 
 logger = logging.getLogger(__name__)
 
@@ -251,7 +251,7 @@ def train_with_val(unscaled_logits, batched_labels, train_accuracy):
 
 def do_train():
     # load data early to get node_type_num
-    ds = data.load_dataset('data/statements')
+    ds = data.load_dataset('../data/statements')
     hyper.node_type_num = len(ds.word2int)
 
     hyper.dump()
@@ -390,10 +390,10 @@ def do_evaluation():
 
 def main():
     apputil.initialize(variable_scope='tbcnn')
-    if hyper.evaluation:
-        do_evaluation()
-    else:
-        do_train()
+    #if hyper.evaluation:
+    #    do_evaluation()
+    #else:
+    do_train()
 
 
 if __name__ == '__main__':

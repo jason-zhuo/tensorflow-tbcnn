@@ -11,9 +11,9 @@ import tensorflow as tf
 import tensorflow_fold as td
 from tensorflow.contrib.tensorboard.plugins import projector
 
-from . import data
-from . import apputil
-from .config import hyper, param
+import data
+import apputil
+from config import hyper, param
 
 logger = logging.getLogger(__name__)
 
@@ -192,7 +192,7 @@ def main():
     apputil.initialize(variable_scope='embedding')
 
     # load data early so we can initialize hyper parameters accordingly
-    ds = data.load_dataset('data/statements')
+    ds = data.load_dataset('../data/statements')
     hyper.node_type_num = len(ds.word2int)
 
     hyper.dump()
@@ -232,7 +232,8 @@ def main():
         summary_writer = tf.summary.FileWriter(hyper.log_dir, graph=sess.graph)
         write_embedding_metadata(summary_writer, ds.word2int)
 
-        for epoch, shuffled in enumerate(td.epochs(train_set, hyper.num_epochs), 1):
+        for epoch, shuffled in enumerate(
+                td.epochs(train_set, hyper.num_epochs), 1):
             for step, batch in enumerate(td.group_by_batches(shuffled, hyper.batch_size), 1):
                 train_feed_dict = {compiler.loom_input_tensor: batch}
 
@@ -244,7 +245,7 @@ def main():
                             gstep, epoch, step, loss_value, hyper.batch_size / duration, duration)
                 if gstep % 10 == 0:
                     summary_writer.add_summary(summary, gstep)
-                if gstep % 100 == 0:
+                if gstep % 10 == 0:
                     saver.save(sess, os.path.join(hyper.train_dir, "model.ckpt"), global_step=gstep)
 
 

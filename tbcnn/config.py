@@ -26,12 +26,12 @@ class hyper(object):
     # learning
     learning_rate = 0.00002  # learning rate
     weight_decay = 0.0002
-    batch_size = 128
-    num_epochs = 100
+    batch_size = 10
+    num_epochs = 10
     # directories
     log_dir = '/tmp/workspace/tf_log'
     train_dir = '/tmp/workspace/tf_log'
-    embedding_dir = '/tmp/workspace/embedding_checkpoints/model'
+    embedding_dir = '/tmp/workspace/tf_log/model'
     # variables
     variable_scope = ''
 
@@ -47,22 +47,22 @@ class hyper(object):
             parser = argparse.ArgumentParser()
             parser.add_argument('--embedding_dir',
                                 help="""Saved embedding metrix,
-                                defaults to /tmp/workspace/embedding_checkpoints/model
+                                defaults to /tmp/workspace/tf_log/model
                                 Only used when train tbcnn.
                                 """,
-                                default='/tmp/workspace/embedding_checkpoints/model')
+                                default='/tmp/workspace/tf_log/model')
             parser.add_argument('--work_dir',
                                 help='directory for saving files, defaults to /tmp/workspace/tf',
-                                default='/tmp/workspace/tflogs')
+                                default='/tmp/workspace/tf_log')
             parser.add_argument('--log_dir',
                                 help='directory for tensorboard logs, defaults to WORK_DIR/logs')
             parser.add_argument('--train_dir',
                                 help='directory for model checkpoints, defaults to WORK_DIR/model')
-            parser.add_argument('--num_epochs', help='total number of epochs', type=int, default=100)
-            parser.add_argument('--batch_size', help='batch size', type=int, default=128)
+            parser.add_argument('--num_epochs', help='total number of epochs', type=int, default=10)
+            parser.add_argument('--batch_size', help='batch size', type=int, default=10)
             parser.add_argument('--learning_rate', help='learning rate', type=float, default=0.0002)
             parser.add_argument('--weight_decay', help='weight decay factor', type=float, default=0.0002)
-            parser.add_argument('--word_dim', help='dimension of node feature', type=int, default=100)
+            parser.add_argument('--word_dim', help='dimension of node feature', type=int, default=50)
             parser.add_argument('--conv_dim',
                                 help='dimension of conv feature detectors', type=int, default=50)
             parser.add_argument('--fc_dim',

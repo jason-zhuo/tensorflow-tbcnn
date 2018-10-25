@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import logging
 import datetime as dt
 
-from .config import hyper
+from config import hyper
 
 logger = logging.getLogger(__name__)
 
